@@ -1,5 +1,14 @@
 #!Makefile
+#
+# --------------------------------------------------------
+#
+#    hurlex 这个小内核的 Makefile
+#    默认使用的C语言编译器是 GCC、汇编语言编译器是 nasm
+#
+# --------------------------------------------------------
+#
 
+# patsubst 处理所有在 C_SOURCES 字列中的字（一列文件名），如果它的 结尾是 '.c'，就用 '.o' 把 '.c' 取代
 C_SOURCES = $(shell find . -name "*.c")
 C_OBJECTS = $(patsubst %.c, %.o, $(C_SOURCES))
 S_SOURCES = $(shell find . -name "*.s")
@@ -15,9 +24,10 @@ ASM_FLAGS = -f elf -g -F stabs
 
 all: $(S_OBJECTS) $(C_OBJECTS) link update_image
 
+# The automatic variable `$<' is just the first prerequisite
 .c.o:
-    @echo 编译代码文件 $< ...
-    $(CC) $(C_FLAGS) $< -o $@
+	@echo 编译代码文件 $< ...
+	$(CC) $(C_FLAGS) $< -o $@
 
 .s.o:
 	@echo 编译汇编文件 $< ...
@@ -34,9 +44,9 @@ clean:
 .PHONY:update_image
 update_image:
 	sudo mount floppy.img /mnt/kernel
-    sudo cp hx_kernel /mnt/kernel/hx_kernel
-    sleep 1
-    sudo umount /mnt/kernel
+	sudo cp hx_kernel /mnt/kernel/hx_kernel
+	sleep 1
+	sudo umount /mnt/kernel
 
 .PHONY:mount_image
 mount_image:
@@ -49,13 +59,14 @@ umount_image:
 .PHONY:qemu
 qemu:
 	qemu -fda floppy.img -boot a
+	#add '-nographic' option if using server of linux distro, such as fedora-server,or "gtk initialization failed" error will occur.
 
 .PHONY:bochs
 bochs:
-	bochs -f tools/bochsrc.txt
+	bochs -f scripts/bochsrc.txt
 
 .PHONY:debug
 debug:
 	qemu -S -s -fda floppy.img -boot a &
-    sleep 1
-    cgdb -x tools/gdbinit
+	sleep 1
+	cgdb -x scripts/gdbinit
