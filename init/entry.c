@@ -29,6 +29,28 @@ static uint16_t *video_memory = (uint16_t *)0xB8000;
 static uint8_t cursor_x = 0;
 static uint8_t cursor_y = 0;
 
+// 端口写一个字节
+inline void outb(uint16_t port, uint8_t value)
+{
+    asm volatile ("outb %1, %0" : : "dN" (port), "a" (value));
+}
+
+static void move_cursor()
+{
+    // 屏幕是 80 字节宽
+    uint16_t cursorLocation = cursor_y * 80 + cursor_x;
+
+    // VGA 内部的寄存器多达300多个，显然无法一一映射到I/O端口的地址空间。
+    // 对此 VGA 控制器的解决方案是，将一个端口作为内部寄存器的索引：0x3D4，
+    // 再通过 0x3D5 端口来设置相应寄存器的值。
+    // 在这里用到的两个内部寄存器的编号为14与15，分别表示光标位置的高8位与低8位。
+
+    outb(0x3D4, 14);                  	// 告诉 VGA 我们要设置光标的高字节
+    outb(0x3D5, cursorLocation >> 8); 	// 发送高 8 位
+    outb(0x3D4, 15);                  	// 告诉 VGA 我们要设置光标的低字节
+    outb(0x3D5, cursorLocation);     	// 发送低 8 位
+}
+
 void console_clear()
 {
     uint8_t attribute_byte = (0 << 4) | (15 & 0x0F);
