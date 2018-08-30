@@ -30,6 +30,8 @@ static uint8_t cursor_x = 0;
 static uint8_t cursor_y = 0;
 
 // 端口写一个字节
+void outb(uint16_t port, uint8_t value);
+// 端口写一个字节
 inline void outb(uint16_t port, uint8_t value)
 {
     asm volatile ("outb %1, %0" : : "dN" (port), "a" (value));
