@@ -22,7 +22,7 @@ int kern_entry()
     *input++ = 'n'; *input++ = color;
     *input++ = 'e'; *input++ = color;
     *input++ = 'l'; *input++ = color;
-    *input++ = '!!!!'; *input++ = color;
+    *input++ = '!'; *input++ = color;
 
 
     return 0;
