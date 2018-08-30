@@ -44,7 +44,7 @@ clean:
 .PHONY:update_image
 update_image:
 	sudo mount floppy.img /mnt/kernel
-	sudo cp yoho_kernel /mnt/kernel/yoho_kernel
+	sudo cp yoho_kernel /mnt/kernel
 	sleep 1
 	sudo umount /mnt/kernel
 
