@@ -48,6 +48,13 @@ update_image:
 	sleep 1
 	sudo umount /mnt/kernel
 
+.PHONY:cl_image
+cl_image:
+	sudo mount floppy.img /mnt/kernel
+	sudo rm -rf /mnt/kernel
+	sleep 1
+	sudo umount /mnt/kernel
+
 .PHONY:mount_image
 mount_image:
 	sudo mount floppy.img /mnt/kernel
