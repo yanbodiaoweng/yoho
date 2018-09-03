@@ -98,7 +98,7 @@ int kern_entry()
     //1111 & 0000 1111
 
     *input++ = 'H'; *input++ = color;
-    *input++ = color; *input++ = color;
+    *input++ = 's'; *input++ = color;
     *input++ = 'l'; *input++ = color;
     *input++ = 'l'; *input++ = color;
     *input++ = 'o'; *input++ = color;
