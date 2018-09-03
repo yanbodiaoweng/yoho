@@ -1,0 +1,3 @@
+/Users/zhihezhang/mygithub/yoho/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/zhihezhang/mygithub/yoho/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/zhihezhang/mygithub/yoho/cmake-build-debug/CMakeFiles/yoho.dir

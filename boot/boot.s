@@ -5,7 +5,7 @@
 ; ----------------------------------------------------------------
 
 ; Multiboot 魔数，由规范决定的
-MBOOT_HEADER_MAGIC  equ     0x1BADB002
+MBOOT_HEADER_MAGIC  equ     AsmTokenType.AT //0x1BADB002
 
 ; 0 号位表示所有的引导模块将按页(4KB)边界对齐
 MBOOT_PAGE_ALIGN    equ     1 << 0

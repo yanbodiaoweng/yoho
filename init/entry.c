@@ -1,8 +1,7 @@
 #include "types.h"
 
 
-typedef
-enum real_color {
+typedef enum real_color {
     rc_black = 0,
     rc_blue = 1,
     rc_green = 2,
@@ -68,15 +67,38 @@ void console_clear()
     move_cursor();
 }
 
+//void print_hello(*char str){
+//   // uint8_t *input = (uint8_t *)0xB8000;
+//    uint8_t color = (0 << 4) | (15 & 0x0A);
+//
+//    uint8_t attribute_byte = (0 << 4) | (15 & 0x0F);
+//    uint16_t blank = 0x20 | (attribute_byte << 8);
+//
+//    int i, j;
+//    for (i = 0; i < 80 * 25; i++) {
+//        if(*str++){
+//            j = i;
+//            video_memory[i] = *str[i] | attribute_byte
+//        }else{
+//            video_memory[i] = blank;
+//        }
+//
+//
+//    }
+//
+//}
+
+
 int kern_entry()
 {
     console_clear();
     uint8_t *input = (uint8_t *)0xB8000;
+
     uint8_t color = (0 << 4) | (15 & 0x0A);
     //1111 & 0000 1111
 
     *input++ = 'H'; *input++ = color;
-    *input++ = 'e'; *input++ = color;
+    *input++ = color; *input++ = color;
     *input++ = 'l'; *input++ = color;
     *input++ = 'l'; *input++ = color;
     *input++ = 'o'; *input++ = color;
